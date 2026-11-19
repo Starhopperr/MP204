@@ -21,6 +21,10 @@ data/holdout_features.csv
 mlruns/
 mlartifacts/
 
+# Local Scratch & Backups
+scratch/
+*_backup*
+
 # OS files
 .DS_Store
 Thumbs.db
