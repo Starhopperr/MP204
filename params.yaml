@@ -1,0 +1,40 @@
+data:
+  raw_train_path: "data/raw/train.csv"
+  raw_later_path: "data/raw/later.csv"
+  raw_holdout_path: "data/raw/holdout_features.csv"
+  clean_train_path: "data/clean/train_clean.csv"
+  predictions_path: "predictions/holdout_predictions.csv"
+
+features:
+  numerical:
+    - storage_days
+    - temp_set_c
+    - humidity_pct
+    - power_cuts_hours
+    - bag_weight_kg
+    - door_openings_per_day
+  categorical:
+    - crop
+    - chamber
+  target: spoilage_pct
+  drop_columns:
+    - record_id
+    - date
+    - spoilage_found_at_unloading
+
+model:
+  name: "Ridge"
+  alpha: 1.0
+  random_state: 42
+  export_path: "models/model.joblib"
+
+tracking:
+  experiment_name: "mp204_cold_storage"
+  tracking_uri: "sqlite:///mlflow.db"
+  registered_model_name: "mp204_model"
+  alias: "champion"
+
+monitoring:
+  later_split_ratio: 0.7
+  promotion_threshold_pct: 0.08
+  psi_bins: 10
